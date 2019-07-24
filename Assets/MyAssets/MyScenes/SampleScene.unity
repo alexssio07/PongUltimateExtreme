@@ -381,7 +381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 0}
-  speed: 9
+  speed: 5
   startSpeed: 0.9
   direction: {x: 0, y: 0}
   sfxWall: {fileID: 8300000, guid: 0e1dfa3ed946cd14e94ee3a998c3ed71, type: 3}
@@ -389,6 +389,7 @@ MonoBehaviour:
   sfxScore: {fileID: 8300000, guid: 267d17c3474d54445aeac00d81aebdeb, type: 3}
   audioSource: {fileID: 0}
   gameController: {fileID: 1174944653}
+  playerHitted: 
   positionOffsetPaddle: {x: 0.45, y: 0, z: 0}
 --- !u!82 &131234758
 AudioSource:
@@ -1052,6 +1053,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aebfd88009158694ab1f892b8831996e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHittedBall: LeftPlayer
   playerAxisInput: PlayerLeftInputSettings
   rigidbody: {fileID: 0}
   speedPaddle: 6
@@ -2351,6 +2353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aebfd88009158694ab1f892b8831996e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHittedBall: RightPlayer
   playerAxisInput: PlayerRightInputSettings
   rigidbody: {fileID: 0}
   speedPaddle: 6

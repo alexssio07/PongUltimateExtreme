@@ -64,6 +64,7 @@ public class MyEventArgs
     public int mySecondInt;
     public bool myBool;
     public bool mySecondBool;
+    public string myString;
 
     public MyEventArgs()
     {
@@ -74,6 +75,7 @@ public class MyEventArgs
         this.myFloat = 0;
         this.myBool = false;
         this.mySecondBool = false;
+        this.myString = string.Empty;
     }
 
     public MyEventArgs(GameObject sender)
@@ -85,6 +87,7 @@ public class MyEventArgs
         this.mySecondInt = 0;
         this.myBool = false;
         this.mySecondBool = false;
+        this.myString = string.Empty;
     }
 
     public MyEventArgs(GameObject sender, float myFloat)
@@ -96,6 +99,7 @@ public class MyEventArgs
         this.mySecondInt = 0;
         this.myBool = false;
         this.mySecondBool = false;
+        this.myString = string.Empty;
     }
     public MyEventArgs(GameObject sender, float myFloat, bool myBool)
     {
@@ -106,6 +110,7 @@ public class MyEventArgs
         this.mySecondInt = 0;
         this.myBool = myBool;
         this.mySecondBool = false;
+        this.myString = string.Empty;
     }
     public MyEventArgs(GameObject sender, bool myBool, bool mySecondBool)
     {
@@ -116,6 +121,7 @@ public class MyEventArgs
         this.mySecondInt = 0;
         this.myFloat = 0;
         this.mySecondFloat = 0;
+        this.myString = string.Empty;
     }
     public MyEventArgs(GameObject sender, int myInt, bool myBool)
     {
@@ -126,6 +132,7 @@ public class MyEventArgs
         this.mySecondInt = 0;
         this.myFloat = 0;
         this.mySecondFloat = 0;
+        this.myString = string.Empty;
     }
 
     public MyEventArgs(GameObject sender, float myFloat, float mySecondFloat)
@@ -137,6 +144,7 @@ public class MyEventArgs
         this.mySecondInt = 0;
         this.myFloat = myFloat;
         this.mySecondFloat = mySecondFloat;
+        this.myString = string.Empty;
     }
 
     public MyEventArgs(GameObject sender, bool myBool, float myFloat, float mySecondFloat)
@@ -148,6 +156,19 @@ public class MyEventArgs
         this.mySecondInt = 0;
         this.myFloat = myFloat;
         this.mySecondFloat = mySecondFloat;
+        this.myString = string.Empty;
+    }
+
+    public MyEventArgs(GameObject sender, string myString, float myFloat, float mySecondFloat)
+    {
+        this.sender = sender;
+        this.myBool = false;
+        this.mySecondBool = false;
+        this.myInt = 0;
+        this.mySecondInt = 0;
+        this.myFloat = myFloat;
+        this.mySecondFloat = mySecondFloat;
+        this.myString = myString;
     }
 }
 

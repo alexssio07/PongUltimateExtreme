@@ -24,7 +24,9 @@ public class Ball : MonoBehaviour
     private Vector3 positionOffsetPaddle;
 
     private bool isReadyToStart;
-    private float currentTimer; 
+    private float currentTimer;
+    private float vectorVelocityX;
+    private float vectorVelocityY;
     private Transform currentTransformToFollow;
 
 
@@ -52,6 +54,12 @@ public class Ball : MonoBehaviour
                 transform.position = transform.position.x > 0 ? currentTransformToFollow.position - positionOffsetPaddle : currentTransformToFollow.position + positionOffsetPaddle;
             }
         }
+        else
+        {
+            vectorVelocityX = this.transform.position.x + rigidbody.velocity.x;
+            vectorVelocityY = this.transform.position.y + rigidbody.velocity.y;
+        }
+
         if (currentTimer > 0)
             currentTimer -= Time.deltaTime;
         else
@@ -77,7 +85,7 @@ public class Ball : MonoBehaviour
         rigidbody.velocity = Vector2.zero;
         transform.position = Vector3.zero;
         int randomNumber = Random.Range(0, 2);
-        StartCoroutine(PerformStartForce(randomNumber == 0 ? new Vector2(Random.Range(-10,-4), Random.Range(-10,4)) : new Vector2(Random.Range(10,4), Random.Range(10,4))));
+        StartCoroutine(PerformStartForce(randomNumber == 0 ? new Vector2(Random.Range(-10, -4), Random.Range(-10, 4)) : new Vector2(Random.Range(10, 4), Random.Range(10, 4))));
     }
 
     private IEnumerator PerformStartForce(Vector2 force)
@@ -89,15 +97,37 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        //rigidbody.velocity = new Vector2(this.transform.position.x + rigidbody.velocity.y, this.transform.position.y + rigidbody.velocity.y);
+        //if (rigidbody.velocity.x < 0 || vectorVelocityX >= collision.transform.localScale.x)
+        //{
+        //    vectorVelocityX = -vectorVelocityX;
+        //    rigidbody.velocity = new Vector2(vectorVelocityX, this.transform.position.y);
+        //}
+        //if (rigidbody.velocity.y < 0 || vectorVelocityY >= collision.transform.localScale.y)
+        //{
+        //    vectorVelocityY = -vectorVelocityY;
+        //    rigidbody.velocity += new Vector2(this.transform.position.x, vectorVelocityY);
+        //}
+
+
         if (collision.collider.gameObject.CompareTag("Player"))
         {
             Player player = collision.collider.GetComponent<Player>();
             playerHitted = player.GetPlayerName();
-            Vector2 velocity;       
-            velocity.x = rigidbody.velocity.x;
-            velocity.y = (rigidbody.velocity.y / 2f) + (collision.collider.attachedRigidbody.velocity.y / 2f);
-            rigidbody.velocity = velocity;
-            audioSource.PlayOneShot(sfxPaddle);
+            Vector2 d = new Vector2();
+            float y = CalculateAngle(this.transform.position, collision.transform.position, player.transform.localScale.y);
+
+            if (playerHitted == "LeftPlayer")
+                d = new Vector2(-1, y).normalized;
+            else if (playerHitted == "RightPlayer")
+                d = new Vector2(1, y).normalized;
+
+            rigidbody.velocity = d * speed;
+            //Vector2 velocity;
+            //velocity.x = rigidbody.velocity.x;
+            //velocity.y = (rigidbody.velocity.y / 2f) + (collision.collider.attachedRigidbody.velocity.y / 2f);
+            //rigidbody.velocity = velocity;
+            //audioSource.PlayOneShot(sfxPaddle);
         }
         else if (collision.collider.gameObject.CompareTag("Y_Wall"))
         {
@@ -109,7 +139,7 @@ public class Ball : MonoBehaviour
     {
         if (collision.CompareTag("X_Wall"))
         {
-            EventManager.instance.CastEvent(MyIndexEvent.playerScored, new MyEventArgs() { sender = this.gameObject, myBool = transform.position.x > 0 });          
+            EventManager.instance.CastEvent(MyIndexEvent.playerScored, new MyEventArgs() { sender = this.gameObject, myBool = transform.position.x > 0 });
         }
         PowerUp powerUpHitted = collision.GetComponent<PowerUp>();
         if (collision.CompareTag("PowerUp"))
@@ -123,7 +153,7 @@ public class Ball : MonoBehaviour
                 //    EventManager.instance.CastEvent(MyIndexEvent.bomb, new MyEventArgs(gameObject, powerUpHitted.PowerUpData.GetCountBalls));
                 //    break;
                 case TypePowerUp.Hammer:
-                    EventManager.instance.CastEvent(MyIndexEvent.hammer, new MyEventArgs(gameObject, powerUpHitted.PowerUpData.GetScaleValue, powerUpHitted.PowerUpData.GetDuration));
+                    EventManager.instance.CastEvent(MyIndexEvent.hammer, new MyEventArgs(gameObject, playerHitted, powerUpHitted.PowerUpData.GetScaleValue, powerUpHitted.PowerUpData.GetDuration));
                     break;
                 case TypePowerUp.Pill:
                     EventManager.instance.CastEvent(MyIndexEvent.pill, new MyEventArgs(gameObject, powerUpHitted.PowerUpData.GetHealValue));
@@ -141,5 +171,10 @@ public class Ball : MonoBehaviour
         speed = e.myFloat;
         currentTimer = e.mySecondFloat;
         rigidbody.velocity = rigidbody.velocity.normalized * speed;
+    }
+
+    public float CalculateAngle(Vector2 ball, Vector2 paddle, float paddleHeight)
+    {
+        return (ball.y - paddle.y) / paddleHeight;
     }
 }

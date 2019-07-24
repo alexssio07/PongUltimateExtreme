@@ -18,13 +18,13 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float health;
 
+
     private float currentTimerSlowing;
     private float currentTimerScaling;
     private float tempSpeed;
-    private float tempScaleX;
-    private float tempScaleY;
-    private float tempScaleZ;
+    private Vector3 startScalePaddle;
     private bool isSlowed;
+
 
 
     private void Awake()
@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
         EventManager.instance.AddListener(MyIndexEvent.potion, OnSetSpeedPlayer);
         EventManager.instance.AddListener(MyIndexEvent.hammer, OnSetScalePaddle);
         EventManager.instance.AddListener(MyIndexEvent.pill, OnSetHealthPlayer);
+        startScalePaddle = this.transform.localScale;
     }
 
     private void Update()
@@ -73,7 +74,7 @@ public class Player : MonoBehaviour
         else
         {
             currentTimerScaling = 0;
-            this.transform.localScale = new Vector3(tempScaleX, tempScaleY, tempScaleZ);
+            this.transform.localScale = startScalePaddle;
         }
 
     }
@@ -93,9 +94,12 @@ public class Player : MonoBehaviour
     {
         Debug.Log("OnSetSpeedPlayer");
         isSlowed = true;
+        if (e.myString != isHittedBall)
+        {
+            tempSpeed = speedPaddle;
+            speedPaddle = speedPaddle - (speedPaddle * e.myFloat / 100);
+        }
         currentTimerSlowing = e.mySecondFloat;
-        tempSpeed = speedPaddle;
-        speedPaddle = speedPaddle - (speedPaddle * e.myFloat / 100); 
     }
 
     public void OnSetScalePaddle(MyEventArgs e)
@@ -103,14 +107,18 @@ public class Player : MonoBehaviour
         // TODO Implementare duration per lo scale
         // TODO Implementare scaling sul giocatore avversario... (?)
         Debug.Log("SetScalePaddle");
-        Vector3 currentScale = this.transform.localScale;
-        if (e.myBool)
-            this.transform.localScale += new Vector3(currentScale.x * e.myFloat / 100, currentScale.y * e.myFloat / 100, 0);
-        else
-            this.transform.localScale -= new Vector3(currentScale.x * e.myFloat / 100, currentScale.y * e.myFloat / 100, 0);
+        if (e.myString != isHittedBall)
+        {
+            if (e.myBool)
+                this.transform.localScale += new Vector3(startScalePaddle.x * e.myFloat / 100, startScalePaddle.y * e.myFloat / 100, 0);
+            else
+                this.transform.localScale -= new Vector3(startScalePaddle.x * e.myFloat / 100, startScalePaddle.y * e.myFloat / 100, 0);
+        }
+
+        currentTimerScaling = e.mySecondFloat;
     }
 
-    public string GetPlayerName ()
+    public string GetPlayerName()
     {
         return isHittedBall;
     }
