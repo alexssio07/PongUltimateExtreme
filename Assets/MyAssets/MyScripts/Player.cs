@@ -35,10 +35,10 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        EventManager.instance.AddListener(MyIndexEvent.playerHitted, OnSetHealthPlayer);
-        EventManager.instance.AddListener(MyIndexEvent.potion, OnSetSpeedPlayer);
+        EventManager.instance.AddListener(MyIndexEvent.playerHitted, OnSetDamagePlayer);
+        EventManager.instance.AddListener(MyIndexEvent.potion, OnSetHealPlayer);
         EventManager.instance.AddListener(MyIndexEvent.hammer, OnSetScalePaddle);
-        EventManager.instance.AddListener(MyIndexEvent.pill, OnSetHealthPlayer);
+        EventManager.instance.AddListener(MyIndexEvent.pill, OnSetHealPlayer);
         startScalePaddle = this.transform.localScale;
     }
 
@@ -79,14 +79,17 @@ public class Player : MonoBehaviour
 
     }
 
-    public void OnSetHealthPlayer(MyEventArgs e)
+    public void OnSetDamagePlayer(MyEventArgs e)
     {
         Debug.Log("OnSetHealthPlayer");
-        health -= e.myFloat;
         if (health <= 0)
         {
             health = 0;
             // TODO Gameover
+        }
+        else
+        {
+            health -= e.myFloat;
         }
     }
 
@@ -109,12 +112,11 @@ public class Player : MonoBehaviour
         Debug.Log("SetScalePaddle");
         if (e.myString != isHittedBall)
         {
-            if (e.myBool)
+            if (!e.myBool)
                 this.transform.localScale += new Vector3(startScalePaddle.x * e.myFloat / 100, startScalePaddle.y * e.myFloat / 100, 0);
             else
                 this.transform.localScale -= new Vector3(startScalePaddle.x * e.myFloat / 100, startScalePaddle.y * e.myFloat / 100, 0);
         }
-
         currentTimerScaling = e.mySecondFloat;
     }
 
@@ -122,4 +124,12 @@ public class Player : MonoBehaviour
     {
         return isHittedBall;
     }
+
+    public void OnSetHealPlayer(MyEventArgs e)
+    {
+        if (health > 0)
+        {
+            health += e.myFloat;
+        }
+    } 
 }

@@ -18,6 +18,7 @@ public class SpawnManager : MonoBehaviour
 
     private int currentIndexTransform;
     private int currentIndexGameObject;
+    private PowerUp powerUpSelected;
 
     private void Start()
     {
@@ -28,26 +29,49 @@ public class SpawnManager : MonoBehaviour
 
     public void OnSpawnPowerUp(MyEventArgs e)
     {
-        if (currentIndexGameObject < powerUp.Length)
+        int countToSpawn = e.myInt;
+        if (countToSpawn <= powerUp.Length)
         {
-            if (currentIndexGameObject > 0) { }
- 
-
-            if (!powerUp[currentIndexGameObject].activeInHierarchy)
+            for (int j = 0; j < countToSpawn; j++)
             {
-                //PowerUp powerUpSelected = powerUp[currentIndexGameObject].GetComponent<PowerUp>();
-                powerUp[currentIndexGameObject].SetActive(true);
-                currentIndexGameObject++;
-             }
+                SpawnPowerUp(j);
+            }
         }
         else
         {
-            currentIndexGameObject = 0;
+            int difference = countToSpawn - powerUp.Length;
+            for (int i = 0; i < powerUp.Length; i++)
+            {
+                SpawnPowerUp(i);
+            }
+            for (int k = 0; k < difference; k++)
+            {
+                SpawnPowerUp(k);
+            }
+        }
+
+    }
+
+    private void SpawnPowerUp(int index)
+    {
+        powerUpSelected = powerUp[index].GetComponent<PowerUp>();
+        int randomNumber = Random.Range(1, 100);
+        if (randomNumber >= powerUpSelected.PowerUpData.GetMinProbabilySpawn && randomNumber <= powerUpSelected.PowerUpData.GetMaxProbabilySpawn)
+        {
+            Debug.Log("SpawnPowerUp");
+            Instantiate(powerUp[index], GetRandomPositionSpawn(), Quaternion.identity);
         }
     }
+
 
     private void OnDestroy()
     {
         EventManager.instance.RemoveListener(MyIndexEvent.spawnPowerUp, OnSpawnPowerUp);
+    }
+
+    private Vector2 GetRandomPositionSpawn()
+    {
+        int randomNumber = Random.Range(0, points.Length);
+        return points[randomNumber].position;
     }
 }

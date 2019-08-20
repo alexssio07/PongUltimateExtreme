@@ -27,31 +27,55 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GUIManager guiManager;
 
-    private float currentTimer;
+    private float currentTimerStartGame;
+    private float currentTimerSpawn;
+    private bool gameStarted;
+
 
     private void Start()
     {
-        Reset();
+        gameStarted = false;
+        currentTimerStartGame = waitingTime;
         EventManager.instance.AddListener(MyIndexEvent.playerScored, OnPlayerScore);
+        EventManager.instance.AddListener(MyIndexEvent.rope, OnEngagesBall);
     }
 
-    public void Reset()
+
+    private void Update()
+    {
+        if (gameStarted)
+        {
+            if (currentTimerSpawn > 0)
+                currentTimerSpawn -= Time.deltaTime;
+            else
+            {
+                currentTimerSpawn = timeToSpawn;
+                EventManager.instance.CastEvent(MyIndexEvent.spawnPowerUp, new MyEventArgs { sender = gameObject, myInt = countSpawnPowerUp });
+            }
+        }
+        else 
+        {
+            if (currentTimerStartGame > 0)
+            {
+                currentTimerStartGame -= Time.deltaTime;
+                EventManager.instance.CastEvent(MyIndexEvent.startToGame, new MyEventArgs { sender = gameObject, myFloat = currentTimerStartGame });
+            }
+            else
+            {
+                currentTimerStartGame = waitingTime;
+                EventManager.instance.CastEvent(MyIndexEvent.startToGame, new MyEventArgs { sender = gameObject, myFloat = currentTimerStartGame });
+                ResetBall();
+            }
+        }
+    }
+
+    public void ResetBall()
     {
         scoreLeftPlayer = 0;
         scoreRightPlayer = 0;
         myBall.InitializeBall();
-        currentTimer = timeToSpawn;
-    }
-
-    private void Update()
-    {
-        if (currentTimer > 0)
-            currentTimer -= Time.deltaTime;
-        else
-        {
-            currentTimer = waitingTime;
-            EventManager.instance.CastEvent(MyIndexEvent.spawnPowerUp, new MyEventArgs { sender = gameObject });
-        }
+        gameStarted = true;
+        currentTimerSpawn = timeToSpawn;
     }
 
     public void OnPlayerScore(MyEventArgs e)
@@ -69,8 +93,20 @@ public class GameManager : MonoBehaviour
         guiManager.SetPlayerScore(scoreLeftPlayer, scoreRightPlayer);
     }
 
-    public void SetHealthPlayer()
+    //public void SetHealthPlayer()
+    //{
+    //    EventManager.instance.CastEvent(MyIndexEvent.playerHitted, new MyEventArgs() { sender = gameObject, myInt = healthLeftPlayer, mySecondInt = healthRightPlayer });
+    //}
+
+    public void OnEngagesBall(MyEventArgs e)
     {
-        EventManager.instance.CastEvent(MyIndexEvent.playerHitted, new MyEventArgs() { sender = gameObject, myInt = healthLeftPlayer, mySecondInt = healthRightPlayer });
+        if (e.myString == "LeftPlayer")
+        {
+            myBall.InitializeBall(leftPaddleTransform);
+        }
+        else if (e.myString == "RightPlayer")
+        {
+            myBall.InitializeBall(rightPaddleTransform);
+        }
     }
 }

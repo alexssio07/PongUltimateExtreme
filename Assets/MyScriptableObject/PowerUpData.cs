@@ -8,6 +8,8 @@ public class PowerUpData : ScriptableObject
     [SerializeField]
     private float scaleValue;
     [SerializeField]
+    private bool reduceScale;
+    [SerializeField]
     private float countBalls;
     [SerializeField]
     private int speedPercentualPlayer;
@@ -16,7 +18,9 @@ public class PowerUpData : ScriptableObject
     [SerializeField]
     private float duration;
     [SerializeField]
-    private float probabilitySpawn;
+    private float minProbabilitySpawn;
+    [SerializeField]
+    private float maxProbabilitySpawn;
     [SerializeField]
     private float damageValue;
     [SerializeField]
@@ -47,9 +51,14 @@ public class PowerUpData : ScriptableObject
         get { return duration;   }
     }
 
-    public float GetProbabilySpawn
+    public float GetMinProbabilySpawn
     {
-        get { return probabilitySpawn; }
+        get { return minProbabilitySpawn; }
+    }
+
+    public float GetMaxProbabilySpawn
+    {
+        get { return maxProbabilitySpawn; }
     }
 
     public float GetDamageValue
@@ -60,5 +69,10 @@ public class PowerUpData : ScriptableObject
     public float GetHealValue
     {
         get { return healValue; }
+    }
+
+    public bool GetReduceScale
+    {
+        get { return reduceScale; }
     }
 }

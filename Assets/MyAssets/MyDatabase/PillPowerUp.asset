@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: PillPowerUp
   m_EditorClassIdentifier: 
   scaleValue: 0
+  reduceScale: 0
   countBalls: 0
   speedPercentualPlayer: 0
   speedPercentualBall: 0
   duration: 0
-  probabilitySpawn: 0
+  probabilitySpawn: 55
   damageValue: 0
   healValue: 30

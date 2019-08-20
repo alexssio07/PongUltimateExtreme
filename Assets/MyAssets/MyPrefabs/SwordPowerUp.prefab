@@ -38,26 +38,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: SwordPowerUp
       objectReference: {fileID: 0}
-    - target: {fileID: 3416998528799415720, guid: 7ce8401f09dd79d42b48e05902d7305d,
+    - target: {fileID: 886144001896871154, guid: 7ce8401f09dd79d42b48e05902d7305d,
         type: 3}
-      propertyPath: typePowerUp
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3416998528799415720, guid: 7ce8401f09dd79d42b48e05902d7305d,
-        type: 3}
-      propertyPath: PowerUpData
-      value: 
-      objectReference: {fileID: 11400000, guid: 15ee41b2c34cf634094f172ff22437a0,
-        type: 2}
-    - target: {fileID: 886144001896871152, guid: 7ce8401f09dd79d42b48e05902d7305d,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: d625705c2b10393418fa45b27c7370b0,
-        type: 3}
-    - target: {fileID: 886144001896871152, guid: 7ce8401f09dd79d42b48e05902d7305d,
-        type: 3}
-      propertyPath: m_WasSpriteAssigned
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 886144001896871167, guid: 7ce8401f09dd79d42b48e05902d7305d,
@@ -114,6 +97,48 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 886144001896871152, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d625705c2b10393418fa45b27c7370b0,
+        type: 3}
+    - target: {fileID: 886144001896871152, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 886144001896871152, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 627578857
+      objectReference: {fileID: 0}
+    - target: {fileID: 886144001896871152, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416998528799415720, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: typePowerUp
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416998528799415720, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: PowerUpData
+      value: 
+      objectReference: {fileID: 11400000, guid: 15ee41b2c34cf634094f172ff22437a0,
+        type: 2}
+    - target: {fileID: 3416998528799415720, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: probabilitySpawn
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416998528799415720, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: speed
+      value: 1.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ce8401f09dd79d42b48e05902d7305d, type: 3}

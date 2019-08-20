@@ -17,6 +17,8 @@ public class GUIManager : MonoBehaviour
     private Image barLeftPlayer;
     [SerializeField]
     private Image barRightPlayer;
+    [SerializeField]
+    private Text textCountdown;
 
     private bool scoredPlayerLeft;
     private bool scoredPlayerRight;
@@ -24,6 +26,7 @@ public class GUIManager : MonoBehaviour
     private void Start()
     {
         EventManager.instance.AddListener(MyIndexEvent.playerHitted, SetHealthPlayer);
+        EventManager.instance.AddListener(MyIndexEvent.startToGame, StartGame);
     }
 
 
@@ -39,5 +42,13 @@ public class GUIManager : MonoBehaviour
         barRightPlayer.fillAmount = (barRightPlayer.fillAmount / 100) * e.mySecondInt;
         leftPlayerHealth.text = e.myInt.ToString() + " %";
         rightPlayerHealth.text = e.mySecondInt.ToString() + " %";
+    }
+
+    public void StartGame(MyEventArgs e)
+    {
+        if (e.myFloat > 0)
+            textCountdown.text = e.myFloat.ToString("0");
+        else
+            textCountdown.gameObject.SetActive(false);
     }
 }

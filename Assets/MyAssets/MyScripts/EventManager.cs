@@ -170,6 +170,30 @@ public class MyEventArgs
         this.mySecondFloat = mySecondFloat;
         this.myString = myString;
     }
+
+    public MyEventArgs(GameObject sender, string myString)
+    {
+        this.sender = sender;
+        this.myBool = false;
+        this.mySecondBool = false;
+        this.myInt = 0;
+        this.mySecondInt = 0;
+        this.myFloat = 0;
+        this.mySecondFloat = 0;
+        this.myString = myString;
+    }
+
+    public MyEventArgs(GameObject sender, string myString, float myFloat, float mySecondFloat, bool myBool)
+    {
+        this.sender = sender;
+        this.myBool = myBool;
+        this.mySecondBool = false;
+        this.myInt = 0;
+        this.mySecondInt = 0;
+        this.myFloat = myFloat;
+        this.mySecondFloat = mySecondFloat;
+        this.myString = myString;
+    }
 }
 
 public enum MyIndexEvent
@@ -177,11 +201,14 @@ public enum MyIndexEvent
     playerHitted = 0,
     winner = 1,
     lost = 2,
-    spawnPowerUp = 3,
-    playerScored = 4,
-    potion = 5,
-    sword = 6,
-    hammer = 7,
-    bomb = 8,
-    pill = 9
+    startToGame = 3,
+    spawnPowerUp = 4,
+    playerScored = 5,
+    potion = 6,
+    sword = 7,
+    hammer = 8,
+    bomb = 9,
+    pill = 10,
+    rope = 11,
+    slowly = 12
 }

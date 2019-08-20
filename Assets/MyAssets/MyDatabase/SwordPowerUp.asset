@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: SwordPowerUp
   m_EditorClassIdentifier: 
   scaleValue: 0
+  reduceScale: 0
   countBalls: 0
-  speedPercentualPlayer: 0
-  speedPercentualBall: 10
-  duration: 10
-  probabilitySpawn: 0
+  speedPercentualPlayer: 25
+  speedPercentualBall: 0
+  duration: 6
+  minProbabilitySpawn: 50
+  maxProbabilitySpawn: 90
   damageValue: 0
   healValue: 0

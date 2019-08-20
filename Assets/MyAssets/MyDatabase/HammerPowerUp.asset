@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: HammerPowerUp
   m_EditorClassIdentifier: 
   scaleValue: 50
+  reduceScale: 0
   countBalls: 0
   speedPercentualPlayer: 0
   speedPercentualBall: 0
   duration: 5
-  probabilitySpawn: 0
+  minProbabilitySpawn: 50
+  maxProbabilitySpawn: 75
   damageValue: 0
   healValue: 0

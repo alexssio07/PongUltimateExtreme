@@ -38,6 +38,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlowlyPowerUp
       objectReference: {fileID: 0}
+    - target: {fileID: 886144001896871154, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 886144001896871167, guid: 7ce8401f09dd79d42b48e05902d7305d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -93,12 +98,58 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 886144001896871167, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 886144001896871167, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 886144001896871167, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 886144001896871152, guid: 7ce8401f09dd79d42b48e05902d7305d,
         type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 474743fd1d14e0d49adbf83ffa9ce83a,
         type: 3}
+    - target: {fileID: 886144001896871152, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 886144001896871152, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 627578857
+      objectReference: {fileID: 0}
+    - target: {fileID: 886144001896871152, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416998528799415720, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: PowerUpData
+      value: 
+      objectReference: {fileID: 11400000, guid: 7ea2bbb56d2179140b527d0732b11685,
+        type: 2}
+    - target: {fileID: 3416998528799415720, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: typePowerUp
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416998528799415720, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: speed
+      value: 1.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ce8401f09dd79d42b48e05902d7305d, type: 3}
 --- !u!1 &7902534024285561381 stripped

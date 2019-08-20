@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: PotionPowerUp
   m_EditorClassIdentifier: 
   scaleValue: 0
+  reduceScale: 0
   countBalls: 0
-  speedPercentualPlayer: 10
+  speedPercentualPlayer: 0
   speedPercentualBall: 0
-  duration: 3
-  probabilitySpawn: 0
+  duration: 1
+  minProbabilitySpawn: 25
+  maxProbabilitySpawn: 60
   damageValue: 0
-  healValue: 0
+  healValue: 60
