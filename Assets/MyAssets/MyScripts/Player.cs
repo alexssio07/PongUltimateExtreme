@@ -35,10 +35,10 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        EventManager.instance.AddListener(MyIndexEvent.playerHitted, OnSetDamagePlayer);
-        EventManager.instance.AddListener(MyIndexEvent.potion, OnSetHealPlayer);
+        EventManager.instance.AddListener(MyIndexEvent.playerHitted, OnSetHealthPlayer);
+        EventManager.instance.AddListener(MyIndexEvent.potion, OnSetSpeedPlayer);
         EventManager.instance.AddListener(MyIndexEvent.hammer, OnSetScalePaddle);
-        EventManager.instance.AddListener(MyIndexEvent.pill, OnSetHealPlayer);
+        EventManager.instance.AddListener(MyIndexEvent.pill, OnSetHealthPlayer);
         startScalePaddle = this.transform.localScale;
     }
 
@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
 
     }
 
-    public void OnSetDamagePlayer(MyEventArgs e)
+    public void OnSetHealthPlayer(MyEventArgs e)
     {
         Debug.Log("OnSetHealthPlayer");
         if (health <= 0)
@@ -124,12 +124,4 @@ public class Player : MonoBehaviour
     {
         return isHittedBall;
     }
-
-    public void OnSetHealPlayer(MyEventArgs e)
-    {
-        if (health > 0)
-        {
-            health += e.myFloat;
-        }
-    } 
 }

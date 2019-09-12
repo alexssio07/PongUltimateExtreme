@@ -47,7 +47,7 @@ public class GUIManager : MonoBehaviour
     public void StartGame(MyEventArgs e)
     {
         if (e.myFloat > 0)
-            textCountdown.text = e.myFloat.ToString("0");
+            textCountdown.text = string.Format("{0:#}", e.myFloat);
         else
             textCountdown.gameObject.SetActive(false);
     }

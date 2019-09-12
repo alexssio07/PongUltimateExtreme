@@ -8,6 +8,7 @@ public class PowerUp : MonoBehaviour
     public TypePowerUp typePowerUp;
 
     [SerializeField]
+    [Range(0.5f, 1.5f)]
     private float speed;
 
     private Rigidbody2D rigidbody;
@@ -43,12 +44,23 @@ public class PowerUp : MonoBehaviour
         rigidbody.isKinematic = false;
     }
 
+    private void OnTriggerEnter(Collider objectHitted)
+    {
+        if (objectHitted.gameObject.CompareTag("Y_Wall") || objectHitted.gameObject.CompareTag("X_Wall"))
+        {
+            objectHitted.gameObject.SetActive(false);
+            objectHitted.transform.position = Vector3.zero;
+        }
+    }
+
 
     public void ResetPowerUp()
     {
-        isActived = false;
         Debug.Log("Reset powerup");
-        Destroy(this.gameObject);
+        isActived = false;
+        this.gameObject.SetActive(isActived);
+        //this.transform.position = new Vector3(this.transform.position.x, positionReset, this.transform.position.z);
+        Destroy(this.gameObject, 1f);
     }
 }
 
@@ -60,6 +72,6 @@ public enum TypePowerUp
     Hammer,
     Bomb,
     Pill,
-    Rope,
+    Magnet,
     Slowly
 }

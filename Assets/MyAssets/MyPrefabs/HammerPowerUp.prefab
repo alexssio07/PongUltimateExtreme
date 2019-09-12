@@ -119,6 +119,16 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 886144001896871152, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 627578857
+      objectReference: {fileID: 0}
+    - target: {fileID: 886144001896871152, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3416998528799415720, guid: 7ce8401f09dd79d42b48e05902d7305d,
         type: 3}
       propertyPath: typePowerUp
@@ -130,6 +140,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 36496b8736e8fac44a5fb0a13a3bb96c,
         type: 2}
+    - target: {fileID: 3416998528799415720, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: speed
+      value: 0.995
+      objectReference: {fileID: 0}
     - target: {fileID: 886144001896871153, guid: 7ce8401f09dd79d42b48e05902d7305d,
         type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x

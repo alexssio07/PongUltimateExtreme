@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
         gameStarted = false;
         currentTimerStartGame = waitingTime;
         EventManager.instance.AddListener(MyIndexEvent.playerScored, OnPlayerScore);
-        EventManager.instance.AddListener(MyIndexEvent.rope, OnEngagesBall);
+        EventManager.instance.AddListener(MyIndexEvent.magnet, OnEngagesBall);
     }
 
 

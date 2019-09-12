@@ -100,55 +100,27 @@ public class Ball : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Vector3 positionBall = this.transform.position;
-        float scalePaddleX = collision.transform.localScale.x / 2;
-        float scalePaddleY = collision.transform.localScale.y / 2;
-
+        float scalePaddleX = collision.transform.localScale.x;
+        float scalePaddleY = collision.transform.localScale.y;
 
         if (collision.collider.gameObject.CompareTag("Player"))
         {
             Player player = collision.collider.GetComponent<Player>();
             playerHitted = player.GetPlayerName();
-            if (positionBall.x >= scalePaddleX || positionBall.y >= scalePaddleY)
+            Debug.Log("giocatore che ha colpito la palla: " + playerHitted);
+            if (positionBall.y > scalePaddleY + positionBall.y && scalePaddleY + positionBall.y < positionBall.y)
             {
-                rbBall.velocity = new Vector2(rbBall.velocity.x, -rbBall.velocity.y);
-            }
-            if (positionBall.x < scalePaddleX || positionBall.y < scalePaddleY)
-            {
-                rbBall.velocity = new Vector2(rbBall.velocity.x, rbBall.velocity.y);
-            }
-            if (positionBall.x > scalePaddleX || positionBall.y < scalePaddleY)
-            {
-                rbBall.velocity = new Vector2(-rbBall.velocity.x, -rbBall.velocity.y);
-            }
-            if (positionBall.x < scalePaddleX || positionBall.y > scalePaddleY)
-            {
-                rbBall.velocity = new Vector2(rbBall.velocity.x, rbBall.velocity.y);
-            }
-            if (positionBall.x == scalePaddleX || positionBall.y == scalePaddleY)
-            {
-                rbBall.velocity = new Vector2(-rbBall.velocity.x, -rbBall.velocity.y);
+                rbBall.velocity = new Vector2(1, -1);
             }
         }
         else if (collision.collider.gameObject.CompareTag("Y_Wall"))
         {
             audioSource.PlayOneShot(sfxWall);
-            float directionX = rbBall.velocity.x % 2;
-            float directionY = rbBall.velocity.y % 2;
-            if (directionX == 0f && directionY == 0f)
+            float directionX = collision.transform.localScale.x;
+            float directionY = collision.transform.localScale.y;
+            if (positionBall.y >= directionY + positionBall.y && directionY + positionBall.y <= positionBall.y)
             {
-                rbBall.velocity = new Vector2(rbBall.velocity.x, -rbBall.velocity.y);
-            }
-            if (directionX == 0f && directionY == 1f)
-            {
-                rbBall.velocity = new Vector2(rbBall.velocity.x, -rbBall.velocity.y);
-            }
-            if (directionX == 1f && directionY == 0f)
-            {
-                rbBall.velocity = new Vector2(rbBall.velocity.x, -rbBall.velocity.y);
-            }
-            if (directionX == 1f && directionY == 1f)
-            {
-                rbBall.velocity = new Vector2(rbBall.velocity.x, -rbBall.velocity.y);
+                rbBall.velocity = new Vector2(1, -1);
             }
         }
     }
@@ -177,13 +149,10 @@ public class Ball : MonoBehaviour
                     EventManager.instance.CastEvent(MyIndexEvent.pill, new MyEventArgs(gameObject, powerUpHitted.PowerUpData.GetHealValue));
                     break;
                 case TypePowerUp.Potion:
-                    EventManager.instance.CastEvent(MyIndexEvent.potion, new MyEventArgs(gameObject, powerUpHitted.PowerUpData.GetHealValue));
+                    EventManager.instance.CastEvent(MyIndexEvent.potion, new MyEventArgs(gameObject, powerUpHitted.PowerUpData.GetSpeedPercentualPlayer, powerUpHitted.PowerUpData.GetDuration));
                     break;
-                case TypePowerUp.Rope:
-                    EventManager.instance.CastEvent(MyIndexEvent.rope, new MyEventArgs(gameObject, playerHitted));
-                    break;
-                case TypePowerUp.Slowly:
-                    EventManager.instance.CastEvent(MyIndexEvent.slowly, new MyEventArgs(gameObject, powerUpHitted.PowerUpData.GetSpeedPercentualPlayer, powerUpHitted.PowerUpData.GetDuration));
+                case TypePowerUp.Magnet:
+                    EventManager.instance.CastEvent(MyIndexEvent.magnet, new MyEventArgs(gameObject, playerHitted));
                     break;
             }
             powerUpHitted.ResetPowerUp();
@@ -199,10 +168,12 @@ public class Ball : MonoBehaviour
 
     public void DuplicateBall(MyEventArgs e)
     {
+        GameObject ballSpawned = this.gameObject;
         for (int i = 0; i < e.myInt; i++)
         {
             Vector2 direction = (this.transform.position - currentPosition).normalized;
-            //Instantiate(this.gameObject, )
+
+            ballSpawned = Instantiate(ballSpawned, new Vector3(ballSpawned.transform.position.x + ballSpawned.transform.localScale.x + direction.x, ballSpawned.transform.position.y + ballSpawned.transform.localScale.y + direction.y), Quaternion.identity);
         }
     }
 

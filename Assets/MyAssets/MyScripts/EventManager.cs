@@ -209,6 +209,5 @@ public enum MyIndexEvent
     hammer = 8,
     bomb = 9,
     pill = 10,
-    rope = 11,
-    slowly = 12
+    magnet = 11
 }

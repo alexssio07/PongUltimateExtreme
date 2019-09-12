@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69609df32b90e46418e0c29630b8da16, type: 3}
-  m_Name: SlowlyPowerUp
+  m_Name: MagnetPowerUp
   m_EditorClassIdentifier: 
   scaleValue: 0
   reduceScale: 0
   countBalls: 0
-  speedPercentualPlayer: 15
+  speedPercentualPlayer: 0
   speedPercentualBall: 0
-  duration: 4
-  probabilitySpawn: 60
+  duration: 1
+  probabilitySpawn: 70
   damageValue: 0
   healValue: 0

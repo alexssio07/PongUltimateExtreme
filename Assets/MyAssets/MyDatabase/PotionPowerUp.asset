@@ -18,7 +18,6 @@ MonoBehaviour:
   speedPercentualPlayer: 0
   speedPercentualBall: 0
   duration: 1
-  minProbabilitySpawn: 25
-  maxProbabilitySpawn: 60
+  probabilitySpawn: 40
   damageValue: 0
   healValue: 60

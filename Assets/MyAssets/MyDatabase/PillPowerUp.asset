@@ -17,7 +17,7 @@ MonoBehaviour:
   countBalls: 0
   speedPercentualPlayer: 0
   speedPercentualBall: 0
-  duration: 0
-  probabilitySpawn: 55
+  duration: 1
+  probabilitySpawn: 60
   damageValue: 0
   healValue: 30
