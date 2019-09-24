@@ -36,30 +36,26 @@ public class SpawnManager : MonoBehaviour
     {
         System.Random random = new System.Random();
         int numberCasual = 0;
-        int[] listNumberGenerated = new int[e.myInt];
+        List<int> listNumberGenerated = new List<int>();
         int number1 = random.Next(minPercentage, maxPercentage);
-        int number2 = 0;
-        for (int i = 0; i < listNumberGenerated.Length; i++)
+        listNumberGenerated.Add(number1);
+        for (int i = 0; i < e.myInt; i++)
         {
             number1 = random.Next(minPercentage, maxPercentage);
-            while (number1 == number2)
+            while (listNumberGenerated.Contains(number1))
             {
                 number1 = random.Next(minPercentage, maxPercentage);
             }
-            listNumberGenerated[i] = number1;
-            number2 = number1;
+            listNumberGenerated.Add(number1);
         }
 
 
         for (int j = 0; j < powerUp.Length; j++)
         {
             PowerUp powerUpSelected = powerUp[j].GetComponent<PowerUp>();
-            //int prova = listNumberGenerated.ToList().ForEach(n => );
             if (listNumberGenerated[j] >= powerUpSelected.PowerUpData.GetProbabilySpawn)
             {
-                //spriteSelected = powerUpSelected.GetComponent<SpriteRenderer>().sprite;
                 Instantiate(powerUpSelected, GetRandomPositionSpawn(), Quaternion.identity);
-                //counterRandom++;
             }
         }
     }
