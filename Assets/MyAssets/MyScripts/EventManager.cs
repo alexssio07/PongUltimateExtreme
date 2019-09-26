@@ -198,16 +198,16 @@ public class MyEventArgs
 
 public enum MyIndexEvent
 {
-    playerHitted = 0,
-    winner = 1,
-    lost = 2,
-    startToGame = 3,
-    spawnPowerUp = 4,
-    playerScored = 5,
-    potion = 6,
-    sword = 7,
-    hammer = 8,
-    bomb = 9,
-    pill = 10,
-    magnet = 11
+    playerHitted,
+    winner,
+    lost,
+    startToGame,
+    spawnWeapon,
+    playerScored,
+    potion,
+    sword,
+    hammer,
+    bomb,
+    pill,
+    magnet
 }

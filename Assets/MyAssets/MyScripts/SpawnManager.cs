@@ -25,11 +25,11 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
-        EventManager.instance.AddListener(MyIndexEvent.spawnPowerUp, OnSpawnPowerUp);
+        EventManager.instance.AddListener(MyIndexEvent.spawnWeapon, OnSpawnPowerUp);
         currentIndexTransform = 0;
         currentIndexGameObject = 0;
-        minPercentage = powerUp.Min(p => p.GetComponent<PowerUp>().PowerUpData.GetProbabilySpawn);
-        maxPercentage = powerUp.Max(p => p.GetComponent<PowerUp>().PowerUpData.GetProbabilySpawn);
+        minPercentage = powerUp.Min(p => p.GetComponent<Weapon>().WeaponData.GetProbabilySpawn);
+        maxPercentage = powerUp.Max(p => p.GetComponent<Weapon>().WeaponData.GetProbabilySpawn);
     }
 
     public void OnSpawnPowerUp(MyEventArgs e)
@@ -52,8 +52,8 @@ public class SpawnManager : MonoBehaviour
 
         for (int j = 0; j < powerUp.Length; j++)
         {
-            PowerUp powerUpSelected = powerUp[j].GetComponent<PowerUp>();
-            if (listNumberGenerated[j] >= powerUpSelected.PowerUpData.GetProbabilySpawn)
+            Weapon powerUpSelected = powerUp[j].GetComponent<Weapon>();
+            if (listNumberGenerated[j] >= powerUpSelected.WeaponData.GetProbabilySpawn)
             {
                 Instantiate(powerUpSelected, GetRandomPositionSpawn(), Quaternion.identity);
             }
@@ -61,7 +61,7 @@ public class SpawnManager : MonoBehaviour
     }
     private void OnDestroy()
     {
-        EventManager.instance.RemoveListener(MyIndexEvent.spawnPowerUp, OnSpawnPowerUp);
+        EventManager.instance.RemoveListener(MyIndexEvent.spawnWeapon, OnSpawnPowerUp);
     }
 
     private Vector2 GetRandomPositionSpawn()

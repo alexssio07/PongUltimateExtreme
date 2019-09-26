@@ -131,31 +131,31 @@ public class Ball : MonoBehaviour
         {
             EventManager.instance.CastEvent(MyIndexEvent.playerScored, new MyEventArgs() { sender = this.gameObject, myBool = transform.position.x > 0 });
         }
-        PowerUp powerUpHitted = collision.GetComponent<PowerUp>();
-        if (collision.CompareTag("PowerUp"))
+        Weapon powerUpHitted = collision.GetComponent<Weapon>();
+        if (collision.CompareTag("Weapon"))
         {
-            switch (powerUpHitted.typePowerUp)
+            switch (powerUpHitted.typeWeapon)
             {
-                case TypePowerUp.Sword:
-                    EventManager.instance.CastEvent(MyIndexEvent.sword, new MyEventArgs(gameObject, powerUpHitted.PowerUpData.GetSpeedPercentualBall, powerUpHitted.PowerUpData.GetDuration));
+                case TypeWeapon.Sword:
+                    EventManager.instance.CastEvent(MyIndexEvent.sword, new MyEventArgs(gameObject, powerUpHitted.WeaponData.GetSpeedPercentualBall, powerUpHitted.WeaponData.GetDuration));
                     break;
-                case TypePowerUp.Bomb:
-                    EventManager.instance.CastEvent(MyIndexEvent.bomb, new MyEventArgs(gameObject, powerUpHitted.PowerUpData.GetCountBalls));
+                case TypeWeapon.Bomb:
+                    EventManager.instance.CastEvent(MyIndexEvent.bomb, new MyEventArgs(gameObject, powerUpHitted.WeaponData.GetCountBalls));
                     break;
-                case TypePowerUp.Hammer:
-                    EventManager.instance.CastEvent(MyIndexEvent.hammer, new MyEventArgs(gameObject, playerHitted, powerUpHitted.PowerUpData.GetScaleValue, powerUpHitted.PowerUpData.GetDuration, powerUpHitted.PowerUpData.GetReduceScale));
+                case TypeWeapon.Hammer:
+                    EventManager.instance.CastEvent(MyIndexEvent.hammer, new MyEventArgs(gameObject, playerHitted, powerUpHitted.WeaponData.GetScaleValue, powerUpHitted.WeaponData.GetDuration, powerUpHitted.WeaponData.GetReduceScale));
                     break;
-                case TypePowerUp.Pill:
-                    EventManager.instance.CastEvent(MyIndexEvent.pill, new MyEventArgs(gameObject, powerUpHitted.PowerUpData.GetHealValue));
+                case TypeWeapon.Pill:
+                    EventManager.instance.CastEvent(MyIndexEvent.pill, new MyEventArgs(gameObject, powerUpHitted.WeaponData.GetHealValue));
                     break;
-                case TypePowerUp.Potion:
-                    EventManager.instance.CastEvent(MyIndexEvent.potion, new MyEventArgs(gameObject, powerUpHitted.PowerUpData.GetSpeedPercentualPlayer, powerUpHitted.PowerUpData.GetDuration));
+                case TypeWeapon.Potion:
+                    EventManager.instance.CastEvent(MyIndexEvent.potion, new MyEventArgs(gameObject, powerUpHitted.WeaponData.GetSpeedPercentualPlayer, powerUpHitted.WeaponData.GetDuration));
                     break;
-                case TypePowerUp.Magnet:
+                case TypeWeapon.Magnet:
                     EventManager.instance.CastEvent(MyIndexEvent.magnet, new MyEventArgs(gameObject, playerHitted));
                     break;
             }
-            powerUpHitted.ResetPowerUp();
+            powerUpHitted.ResetWeapon();
         }
     }
 

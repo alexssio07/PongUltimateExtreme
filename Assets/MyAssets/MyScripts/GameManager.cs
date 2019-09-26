@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 currentTimerSpawn = timeToSpawn;
-                EventManager.instance.CastEvent(MyIndexEvent.spawnPowerUp, new MyEventArgs { sender = gameObject, myInt = countSpawnPowerUp });
+                EventManager.instance.CastEvent(MyIndexEvent.spawnWeapon, new MyEventArgs { sender = gameObject, myInt = countSpawnPowerUp });
             }
         }
         else 

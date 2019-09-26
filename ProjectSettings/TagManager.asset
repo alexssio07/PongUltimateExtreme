@@ -7,7 +7,7 @@ TagManager:
   - Ball
   - Y_Wall
   - X_Wall
-  - PowerUp
+  - Weapon
   layers:
   - Default
   - TransparentFX
@@ -18,7 +18,7 @@ TagManager:
   - 
   - 
   - Wallpaper
-  - PowerUp
+  - Weapon
   - Ball
   - 
   - 
@@ -51,7 +51,7 @@ TagManager:
   - name: Gameplay
     uniqueID: 3202835959
     locked: 0
-  - name: PowerUp
+  - name: Weapon
     uniqueID: 627578857
     locked: 0
   - name: Ball
