@@ -11,7 +11,7 @@ public class Weapon : MonoBehaviour
     [Range(0.5f, 1.5f)]
     private float speed;
 
-    private Rigidbody2D rigidbody;
+    private Rigidbody2D rb;
     private bool isActived;
 
     private const float positionReset = 6.5f;
@@ -19,8 +19,8 @@ public class Weapon : MonoBehaviour
 
     private void Awake()
     {
-        rigidbody = this.GetComponent<Rigidbody2D>();
-        rigidbody.isKinematic = true;
+        rb = this.GetComponent<Rigidbody2D>();
+        rb.isKinematic = true;
         isActived = false;
     }
 
@@ -29,7 +29,7 @@ public class Weapon : MonoBehaviour
         if (isActived)
         {
             Vector2 direction = speed * (-Vector2.up);
-            rigidbody.velocity = direction;
+            rb.velocity = direction;
             if (this.transform.position.y <= boundY)
             {
                 ResetWeapon();
@@ -41,7 +41,7 @@ public class Weapon : MonoBehaviour
     {
         Debug.Log("Actived Weapon");
         isActived = true;
-        rigidbody.isKinematic = false;
+        rb.isKinematic = false;
     }
 
     private void OnTriggerEnter(Collider objectHitted)

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
@@ -19,8 +20,6 @@ public class Ball : MonoBehaviour
     [SerializeField]
     private GameManager gameController;
     [SerializeField]
-    private string playerHitted;
-    [SerializeField]
     private Vector3 positionOffsetPaddle;
 
     private bool isReadyToStart;
@@ -29,7 +28,10 @@ public class Ball : MonoBehaviour
     private float vectorVelocityY;
     private Transform currentTransformToFollow;
     private Vector3 currentPosition;
+    private NamePlayer playerHitted;
+    private Vector3 scalePlayer;
 
+    private List<Player> players;
 
     private void Awake()
     {
@@ -40,6 +42,8 @@ public class Ball : MonoBehaviour
     private void Start()
     {
         EventManager.instance.AddListener(MyIndexEvent.sword, OnSlowlyBall);
+        players = FindObjectsOfType<Player>().ToList();
+        scalePlayer = players.Select(p => p.transform.localScale).FirstOrDefault();
     }
 
     private void Update()
@@ -93,7 +97,7 @@ public class Ball : MonoBehaviour
     private IEnumerator PerformStartForce(Vector2 force)
     {
         yield return new WaitForSeconds(3f);
-        rbBall.velocity = force * startSpeed;
+        rbBall.velocity = force.normalized * startSpeed;
     }
 
 
@@ -106,7 +110,7 @@ public class Ball : MonoBehaviour
         if (collision.collider.gameObject.CompareTag("Player"))
         {
             Player player = collision.collider.GetComponent<Player>();
-            playerHitted = player.GetPlayerName();
+            playerHitted = player.NamePlayer;
             Debug.Log("giocatore che ha colpito la palla: " + playerHitted);
             if (positionBall.y > scalePaddleY + positionBall.y && scalePaddleY + positionBall.y < positionBall.y)
             {
@@ -132,27 +136,37 @@ public class Ball : MonoBehaviour
             EventManager.instance.CastEvent(MyIndexEvent.playerScored, new MyEventArgs() { sender = this.gameObject, myBool = transform.position.x > 0 });
         }
         Weapon powerUpHitted = collision.GetComponent<Weapon>();
+        
         if (collision.CompareTag("Weapon"))
         {
             switch (powerUpHitted.typeWeapon)
             {
                 case TypeWeapon.Sword:
-                    EventManager.instance.CastEvent(MyIndexEvent.sword, new MyEventArgs(gameObject, powerUpHitted.WeaponData.GetSpeedPercentualBall, powerUpHitted.WeaponData.GetDuration));
+                    if (playerHitted == NamePlayer.PlayerLeft)
+                    {
+                        Vector3 positionPlayer = players.Where(p => p.NamePlayer == NamePlayer.PlayerLeft).FirstOrDefault().transform.position;
+                        collision.gameObject.transform.position = new Vector3(this.transform.position.x + scalePlayer.x, this.transform.position.y, this.transform.position.z);
+                    }
+                    else if (playerHitted == NamePlayer.PlayerRight)
+                    {
+                        Vector3 positionPlayer = players.Where(p => p.NamePlayer == NamePlayer.PlayerRight).FirstOrDefault().transform.position;
+                        collision.gameObject.transform.position = new Vector3(positionPlayer.x - scalePlayer.x, this.transform.position.y, this.transform.position.z);
+                    }
                     break;
                 case TypeWeapon.Bomb:
-                    EventManager.instance.CastEvent(MyIndexEvent.bomb, new MyEventArgs(gameObject, powerUpHitted.WeaponData.GetCountBalls));
+                    //EventManager.instance.CastEvent(MyIndexEvent.bomb, new MyEventArgs(gameObject, powerUpHitted.WeaponData.GetCountBalls));
                     break;
                 case TypeWeapon.Hammer:
-                    EventManager.instance.CastEvent(MyIndexEvent.hammer, new MyEventArgs(gameObject, playerHitted, powerUpHitted.WeaponData.GetScaleValue, powerUpHitted.WeaponData.GetDuration, powerUpHitted.WeaponData.GetReduceScale));
+                    //EventManager.instance.CastEvent(MyIndexEvent.hammer, new MyEventArgs(gameObject, playerHitted, powerUpHitted.WeaponData.GetScaleValue, powerUpHitted.WeaponData.GetDuration, powerUpHitted.WeaponData.GetReduceScale));
                     break;
                 case TypeWeapon.Pill:
-                    EventManager.instance.CastEvent(MyIndexEvent.pill, new MyEventArgs(gameObject, powerUpHitted.WeaponData.GetHealValue));
+                    //EventManager.instance.CastEvent(MyIndexEvent.pill, new MyEventArgs(gameObject, powerUpHitted.WeaponData.GetHealValue));
                     break;
                 case TypeWeapon.Potion:
-                    EventManager.instance.CastEvent(MyIndexEvent.potion, new MyEventArgs(gameObject, powerUpHitted.WeaponData.GetSpeedPercentualPlayer, powerUpHitted.WeaponData.GetDuration));
+                    //EventManager.instance.CastEvent(MyIndexEvent.potion, new MyEventArgs(gameObject, powerUpHitted.WeaponData.GetSpeedPercentualPlayer, powerUpHitted.WeaponData.GetDuration));
                     break;
                 case TypeWeapon.Magnet:
-                    EventManager.instance.CastEvent(MyIndexEvent.magnet, new MyEventArgs(gameObject, playerHitted));
+                    //EventManager.instance.CastEvent(MyIndexEvent.magnet, new MyEventArgs(gameObject, playerHitted));
                     break;
             }
             powerUpHitted.ResetWeapon();

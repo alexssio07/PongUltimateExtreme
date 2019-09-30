@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69609df32b90e46418e0c29630b8da16, type: 3}
   m_Name: Hammer
   m_EditorClassIdentifier: 
-  scaleValue: 50
+  scaleValue: 0
   reduceScale: 0
   countBalls: 0
   speedPercentualPlayer: 0
   speedPercentualBall: 0
-  duration: 5
-  probabilitySpawn: 80
-  damageValue: 0
+  duration: 0
+  probabilitySpawn: 1
+  damageValue: 60
   healValue: 0

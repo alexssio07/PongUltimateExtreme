@@ -18,9 +18,6 @@ public class PowerUpData : ScriptableObject
     [SerializeField]
     private float duration;
     [SerializeField]
-    [Range(1, 100)]
-    private int probabilitySpawn;
-    [SerializeField]
     private float damageValue;
     [SerializeField]
     private float healValue;
@@ -48,11 +45,6 @@ public class PowerUpData : ScriptableObject
     public float GetDuration
     {
         get { return duration;   }
-    }
-
-    public int GetProbabilySpawn
-    {
-        get { return probabilitySpawn; }
     }
 
     public float GetDamageValue

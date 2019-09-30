@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
+    [SerializeField]
+    private float timerSecPhase1;
+    [SerializeField]
+    private float timeMinWeaponSpawn;
+    [SerializeField]
+    private float timeMaxWeaponSpawn;
     [SerializeField]
     private Ball myBall;
     [SerializeField]
@@ -19,63 +26,71 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private int healthRightPlayer;
     [SerializeField]
-    private int countSpawnPowerUp;
-    [SerializeField]
-    private float timeToSpawn;
-    [SerializeField]
-    private float waitingTime;
-    [SerializeField]
-    private GUIManager guiManager;
+    private int countSpawnWeapon;
 
     private float currentTimerStartGame;
     private float currentTimerSpawn;
-    private bool gameStarted;
+    private Phase phase;
+    private static float preTimeStartGame = 3f;
 
 
     private void Start()
     {
-        gameStarted = false;
-        currentTimerStartGame = waitingTime;
         EventManager.instance.AddListener(MyIndexEvent.playerScored, OnPlayerScore);
         EventManager.instance.AddListener(MyIndexEvent.magnet, OnEngagesBall);
+        phase = Phase.Zero;
+        currentTimerStartGame = preTimeStartGame;
+        currentTimerSpawn = Random.Range(timeMinWeaponSpawn, timeMaxWeaponSpawn);
     }
 
 
     private void Update()
     {
-        if (gameStarted)
+        switch (phase)
         {
-            if (currentTimerSpawn > 0)
-                currentTimerSpawn -= Time.deltaTime;
-            else
-            {
-                currentTimerSpawn = timeToSpawn;
-                EventManager.instance.CastEvent(MyIndexEvent.spawnWeapon, new MyEventArgs { sender = gameObject, myInt = countSpawnPowerUp });
-            }
-        }
-        else 
-        {
-            if (currentTimerStartGame > 0)
-            {
-                currentTimerStartGame -= Time.deltaTime;
-                EventManager.instance.CastEvent(MyIndexEvent.startToGame, new MyEventArgs { sender = gameObject, myFloat = currentTimerStartGame });
-            }
-            else
-            {
-                currentTimerStartGame = waitingTime;
-                EventManager.instance.CastEvent(MyIndexEvent.startToGame, new MyEventArgs { sender = gameObject, myFloat = currentTimerStartGame });
-                ResetBall();
-            }
+            case Phase.Zero:
+                GUIManager.Instance.SetTextTimer(currentTimerStartGame, false);
+                if (currentTimerStartGame > 0)
+                    currentTimerStartGame -= Time.deltaTime;
+                else
+                {
+                    currentTimerStartGame = 0;
+                    StartGame();
+                }
+                break;
+            case Phase.Uno:
+                GUIManager.Instance.SetTextTimer(Time.realtimeSinceStartup, true);
+                if (Time.realtimeSinceStartup >= timerSecPhase1)
+                    StartWar();
+                break;
+            case Phase.Due:
+                if (currentTimerSpawn > 0)
+                    currentTimerSpawn -= Time.deltaTime;
+                else
+                {
+                    currentTimerSpawn = Random.Range(timeMinWeaponSpawn, timeMaxWeaponSpawn);
+                    EventManager.instance.CastEvent(MyIndexEvent.spawnWeapon, new MyEventArgs() { sender = gameObject, myInt = countSpawnWeapon });
+                }
+                break;
         }
     }
 
-    public void ResetBall()
+    public void StartGame()
     {
+        phase = Phase.Uno;
         scoreLeftPlayer = 0;
         scoreRightPlayer = 0;
+        currentTimerStartGame = timerSecPhase1;
         myBall.InitializeBall();
-        gameStarted = true;
-        currentTimerSpawn = timeToSpawn;
+    }
+
+    public void StartWar()
+    {
+        phase = Phase.Due;
+        currentTimerStartGame = 0;
+        GUIManager.Instance.ActivateBarHealth();
+        EventManager.instance.CastEvent(MyIndexEvent.playerHitted, new MyEventArgs() { sender = gameObject, myFloat = healthLeftPlayer, mySecondFloat = healthRightPlayer });
+        EventManager.instance.CastEvent(MyIndexEvent.spawnWeapon, new MyEventArgs() { sender = gameObject, myInt = countSpawnWeapon });
     }
 
     public void OnPlayerScore(MyEventArgs e)
@@ -90,7 +105,7 @@ public class GameManager : MonoBehaviour
             scoreRightPlayer++;
             myBall.InitializeBall(leftPaddleTransform);
         }
-        guiManager.SetPlayerScore(scoreLeftPlayer, scoreRightPlayer);
+        GUIManager.Instance.SetPlayerScore(scoreLeftPlayer, scoreRightPlayer);
     }
 
     //public void SetHealthPlayer()
@@ -109,4 +124,12 @@ public class GameManager : MonoBehaviour
             myBall.InitializeBall(rightPaddleTransform);
         }
     }
+}
+
+public enum Phase
+{
+    Zero,
+    Uno,
+    Due,
+    Tre
 }

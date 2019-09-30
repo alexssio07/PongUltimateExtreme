@@ -65,6 +65,7 @@ public class MyEventArgs
     public bool myBool;
     public bool mySecondBool;
     public string myString;
+    public NamePlayer namePlayer;
 
     public MyEventArgs()
     {
@@ -194,6 +195,19 @@ public class MyEventArgs
         this.mySecondFloat = mySecondFloat;
         this.myString = myString;
     }
+
+    public MyEventArgs(GameObject sender, NamePlayer namePlayer)
+    {
+        this.sender = sender;
+        this.namePlayer = namePlayer;
+        this.myFloat = 0;
+        this.mySecondFloat = 0;
+        this.myInt = 0;
+        this.mySecondInt = 0;
+        this.myBool = false;
+        this.mySecondBool = false;
+        this.myString = string.Empty;
+    }
 }
 
 public enum MyIndexEvent
@@ -201,6 +215,8 @@ public enum MyIndexEvent
     playerHitted,
     winner,
     lost,
+    respawnPlayer,
+    spawnPlayer,
     startToGame,
     spawnWeapon,
     playerScored,
