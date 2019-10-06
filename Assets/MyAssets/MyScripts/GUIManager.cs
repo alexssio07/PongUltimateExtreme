@@ -64,6 +64,7 @@ public class GUIManager : MonoBehaviour
     }
 
 
+
     public void SetPlayerScore(int scorePlayerLeft, int scorePlayerRight)
     {
         this.leftPlayerScoreText.text = "Giocatore 1 :     " + scorePlayerLeft;
@@ -80,7 +81,7 @@ public class GUIManager : MonoBehaviour
 
     public void SetTextTimer(float time, bool isPhase1)
     {
-        Debug.Log(time);
+        //Debug.Log(time);
         if (time > 0)
         {
             if (!isPhase1)

@@ -36,7 +36,7 @@ PrefabInstance:
     - target: {fileID: 886144001896871154, guid: 7ce8401f09dd79d42b48e05902d7305d,
         type: 3}
       propertyPath: m_Name
-      value: HammerPowerUp
+      value: Hammer
       objectReference: {fileID: 0}
     - target: {fileID: 886144001896871154, guid: 7ce8401f09dd79d42b48e05902d7305d,
         type: 3}
@@ -46,7 +46,7 @@ PrefabInstance:
     - target: {fileID: 886144001896871167, guid: 7ce8401f09dd79d42b48e05902d7305d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.15344
       objectReference: {fileID: 0}
     - target: {fileID: 886144001896871167, guid: 7ce8401f09dd79d42b48e05902d7305d,
         type: 3}
@@ -98,6 +98,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 886144001896871167, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.16970314
+      objectReference: {fileID: 0}
+    - target: {fileID: 886144001896871167, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.16970314
+      objectReference: {fileID: 0}
+    - target: {fileID: 886144001896871167, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.16970314
+      objectReference: {fileID: 0}
     - target: {fileID: 886144001896871152, guid: 7ce8401f09dd79d42b48e05902d7305d,
         type: 3}
       propertyPath: m_Sprite
@@ -145,6 +160,17 @@ PrefabInstance:
       propertyPath: speed
       value: 0.995
       objectReference: {fileID: 0}
+    - target: {fileID: 3416998528799415720, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: typeWeapon
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416998528799415720, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: WeaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: 36496b8736e8fac44a5fb0a13a3bb96c,
+        type: 2}
     - target: {fileID: 886144001896871153, guid: 7ce8401f09dd79d42b48e05902d7305d,
         type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x

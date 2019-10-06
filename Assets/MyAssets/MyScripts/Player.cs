@@ -14,13 +14,7 @@ public class Player : MonoBehaviour
         get { return health; }
         set
         {
-            if (health > 0 && !IsDeath)
-                health -= value;
-            else
-            {
-                IsDeath = true;
-                health = 0;
-            }
+            health = value;
         }
     }
 
@@ -45,6 +39,7 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         isSlowed = false;
+        Health = HealthPlayer;
     }
 
     private void Start()
@@ -97,10 +92,13 @@ public class Player : MonoBehaviour
     public void OnSetHealthPlayer(MyEventArgs e)
     {
         Debug.Log("OnSetHealthPlayer");
-        if (Health > 0 && !IsDeath)
+        if (e.namePlayer == this.NamePlayer)
             Health -= e.myFloat;
-        else if (!IsDeath)
+
+        if (Health <= 0)
         {
+            health = 0;
+            IsDeath = true;
             EventManager.instance.CastEvent(MyIndexEvent.respawnPlayer, new MyEventArgs() { sender = gameObject, myFloat = timeRespawnPlayer, namePlayer = this.NamePlayer });
         }
     }

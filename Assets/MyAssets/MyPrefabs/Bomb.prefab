@@ -26,7 +26,7 @@ PrefabInstance:
     - target: {fileID: 886144001896871154, guid: 7ce8401f09dd79d42b48e05902d7305d,
         type: 3}
       propertyPath: m_Name
-      value: BombPowerUp
+      value: Bomb
       objectReference: {fileID: 0}
     - target: {fileID: 886144001896871154, guid: 7ce8401f09dd79d42b48e05902d7305d,
         type: 3}
@@ -88,6 +88,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 886144001896871167, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2538
+      objectReference: {fileID: 0}
+    - target: {fileID: 886144001896871167, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2538
+      objectReference: {fileID: 0}
+    - target: {fileID: 886144001896871167, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.2538
+      objectReference: {fileID: 0}
     - target: {fileID: 886144001896871152, guid: 7ce8401f09dd79d42b48e05902d7305d,
         type: 3}
       propertyPath: m_Sprite
@@ -124,6 +139,17 @@ PrefabInstance:
         type: 3}
       propertyPath: speed
       value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416998528799415720, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: WeaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: 308c7ef56d7675d419565745d95621cb,
+        type: 2}
+    - target: {fileID: 3416998528799415720, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: typeWeapon
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ce8401f09dd79d42b48e05902d7305d, type: 3}

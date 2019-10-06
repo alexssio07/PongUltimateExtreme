@@ -36,7 +36,7 @@ PrefabInstance:
     - target: {fileID: 886144001896871154, guid: 7ce8401f09dd79d42b48e05902d7305d,
         type: 3}
       propertyPath: m_Name
-      value: PillPowerUp
+      value: Pill
       objectReference: {fileID: 0}
     - target: {fileID: 886144001896871154, guid: 7ce8401f09dd79d42b48e05902d7305d,
         type: 3}
@@ -159,6 +159,17 @@ PrefabInstance:
         type: 3}
       propertyPath: speed
       value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416998528799415720, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: WeaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: fc6f476e42d1c6440ab98a9f8b552921,
+        type: 2}
+    - target: {fileID: 3416998528799415720, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: typeWeapon
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6028602400805756712, guid: 7ce8401f09dd79d42b48e05902d7305d,
         type: 3}

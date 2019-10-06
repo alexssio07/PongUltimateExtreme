@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+    public NamePlayer PlayerHitted;
+
     [SerializeField]
     private Rigidbody2D rbBall;
     [SerializeField]
@@ -28,7 +30,6 @@ public class Ball : MonoBehaviour
     private float vectorVelocityY;
     private Transform currentTransformToFollow;
     private Vector3 currentPosition;
-    private NamePlayer playerHitted;
     private Vector3 scalePlayer;
 
     private List<Player> players;
@@ -110,8 +111,8 @@ public class Ball : MonoBehaviour
         if (collision.collider.gameObject.CompareTag("Player"))
         {
             Player player = collision.collider.GetComponent<Player>();
-            playerHitted = player.NamePlayer;
-            Debug.Log("giocatore che ha colpito la palla: " + playerHitted);
+            PlayerHitted = player.NamePlayer;
+            Debug.Log("giocatore che ha colpito la palla: " + PlayerHitted);
             if (positionBall.y > scalePaddleY + positionBall.y && scalePaddleY + positionBall.y < positionBall.y)
             {
                 rbBall.velocity = new Vector2(1, -1);
@@ -136,24 +137,36 @@ public class Ball : MonoBehaviour
             EventManager.instance.CastEvent(MyIndexEvent.playerScored, new MyEventArgs() { sender = this.gameObject, myBool = transform.position.x > 0 });
         }
         Weapon powerUpHitted = collision.GetComponent<Weapon>();
-        
+        Debug.Log(powerUpHitted.typeWeapon);
         if (collision.CompareTag("Weapon"))
         {
+            Vector3 positionPlayer = players.Where(p => p.NamePlayer == NamePlayer.PlayerLeft).FirstOrDefault().transform.position;
             switch (powerUpHitted.typeWeapon)
             {
                 case TypeWeapon.Sword:
-                    if (playerHitted == NamePlayer.PlayerLeft)
+                    if (PlayerHitted == NamePlayer.PlayerLeft)
                     {
-                        Vector3 positionPlayer = players.Where(p => p.NamePlayer == NamePlayer.PlayerLeft).FirstOrDefault().transform.position;
-                        collision.gameObject.transform.position = new Vector3(this.transform.position.x + scalePlayer.x, this.transform.position.y, this.transform.position.z);
+                        collision.gameObject.transform.position = new Vector3(positionPlayer.x + scalePlayer.x, positionPlayer.y, positionPlayer.z);
+                        collision.gameObject.transform.rotation = new Quaternion(0, 0, -50, 0);
                     }
-                    else if (playerHitted == NamePlayer.PlayerRight)
+                    else if (PlayerHitted == NamePlayer.PlayerRight)
                     {
-                        Vector3 positionPlayer = players.Where(p => p.NamePlayer == NamePlayer.PlayerRight).FirstOrDefault().transform.position;
-                        collision.gameObject.transform.position = new Vector3(positionPlayer.x - scalePlayer.x, this.transform.position.y, this.transform.position.z);
+                        collision.gameObject.transform.position = new Vector3(positionPlayer.x - scalePlayer.x, positionPlayer.y, positionPlayer.z);
+                        collision.gameObject.transform.rotation = new Quaternion(0, 0, 132, 0);
                     }
                     break;
                 case TypeWeapon.Bomb:
+                    if (PlayerHitted == NamePlayer.PlayerLeft)
+                    {
+                        collision.gameObject.transform.position = new Vector3(positionPlayer.x + scalePlayer.x, positionPlayer.y, positionPlayer.z);
+                        collision.gameObject.transform.rotation = new Quaternion(0, 0, -50, 0);
+                    }
+                    else if (PlayerHitted == NamePlayer.PlayerRight)
+                    {
+                        collision.gameObject.transform.position = new Vector3(positionPlayer.x - scalePlayer.x, positionPlayer.y, positionPlayer.z);
+                        collision.gameObject.transform.rotation = new Quaternion(0, 0, 132, 0);
+                    }
+
                     //EventManager.instance.CastEvent(MyIndexEvent.bomb, new MyEventArgs(gameObject, powerUpHitted.WeaponData.GetCountBalls));
                     break;
                 case TypeWeapon.Hammer:
@@ -161,15 +174,18 @@ public class Ball : MonoBehaviour
                     break;
                 case TypeWeapon.Pill:
                     //EventManager.instance.CastEvent(MyIndexEvent.pill, new MyEventArgs(gameObject, powerUpHitted.WeaponData.GetHealValue));
+                    powerUpHitted.ResetWeapon();
                     break;
                 case TypeWeapon.Potion:
                     //EventManager.instance.CastEvent(MyIndexEvent.potion, new MyEventArgs(gameObject, powerUpHitted.WeaponData.GetSpeedPercentualPlayer, powerUpHitted.WeaponData.GetDuration));
+                    powerUpHitted.ResetWeapon(); 
                     break;
                 case TypeWeapon.Magnet:
                     //EventManager.instance.CastEvent(MyIndexEvent.magnet, new MyEventArgs(gameObject, playerHitted));
+                    powerUpHitted.ResetWeapon();
                     break;
             }
-            powerUpHitted.ResetWeapon();
+
         }
     }
 

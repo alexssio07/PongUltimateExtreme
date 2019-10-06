@@ -36,7 +36,7 @@ PrefabInstance:
     - target: {fileID: 886144001896871154, guid: 7ce8401f09dd79d42b48e05902d7305d,
         type: 3}
       propertyPath: m_Name
-      value: PotionPowerUp
+      value: Potion
       objectReference: {fileID: 0}
     - target: {fileID: 886144001896871154, guid: 7ce8401f09dd79d42b48e05902d7305d,
         type: 3}
@@ -149,6 +149,17 @@ PrefabInstance:
         type: 3}
       propertyPath: speed
       value: 1.184
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416998528799415720, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: WeaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: 378ce5812be0c7149871a75106c2deac,
+        type: 2}
+    - target: {fileID: 3416998528799415720, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: typeWeapon
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ce8401f09dd79d42b48e05902d7305d, type: 3}

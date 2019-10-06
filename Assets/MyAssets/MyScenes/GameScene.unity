@@ -1811,7 +1811,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256d8c420ba7d884e8fc39a416836a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerSecPhase1: 90
+  timerSecPhase1: 20
   timeMinWeaponSpawn: 1
   timeMaxWeaponSpawn: 3
   myBall: {fileID: 131234757}

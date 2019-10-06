@@ -36,7 +36,7 @@ PrefabInstance:
     - target: {fileID: 886144001896871154, guid: 7ce8401f09dd79d42b48e05902d7305d,
         type: 3}
       propertyPath: m_Name
-      value: MagnetPowerUp
+      value: Magnet
       objectReference: {fileID: 0}
     - target: {fileID: 886144001896871154, guid: 7ce8401f09dd79d42b48e05902d7305d,
         type: 3}
@@ -155,6 +155,17 @@ PrefabInstance:
       propertyPath: speed
       value: 1.3
       objectReference: {fileID: 0}
+    - target: {fileID: 3416998528799415720, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: typeWeapon
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416998528799415720, guid: 7ce8401f09dd79d42b48e05902d7305d,
+        type: 3}
+      propertyPath: WeaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: adff8a382dfa22c4b8d6f39115bfe419,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ce8401f09dd79d42b48e05902d7305d, type: 3}
 --- !u!1 &5502529208433457839 stripped

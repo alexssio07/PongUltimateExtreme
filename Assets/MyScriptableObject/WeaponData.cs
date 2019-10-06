@@ -24,6 +24,10 @@ public class WeaponData : ScriptableObject
     private float damageValue;
     [SerializeField]
     private float healValue;
+    [SerializeField]
+    private float timeAutoDestruction;
+    [SerializeField]
+    private float speedFiring;
 
     public float GetScaleValue
     {
@@ -68,5 +72,15 @@ public class WeaponData : ScriptableObject
     public bool GetReduceScale
     {
         get { return reduceScale; }
+    }
+
+    public float GetTimeAutoDestruction
+    {
+        get { return timeAutoDestruction; }
+    }
+
+    public float GetSpeedFiring
+    {
+        get { return speedFiring; }
     }
 }

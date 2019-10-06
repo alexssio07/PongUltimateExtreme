@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
         phase = Phase.Due;
         currentTimerStartGame = 0;
         GUIManager.Instance.ActivateBarHealth();
-        EventManager.instance.CastEvent(MyIndexEvent.playerHitted, new MyEventArgs() { sender = gameObject, myFloat = healthLeftPlayer, mySecondFloat = healthRightPlayer });
+        //EventManager.instance.CastEvent(MyIndexEvent.playerHitted, new MyEventArgs() { sender = gameObject, myFloat = healthLeftPlayer, mySecondFloat = healthRightPlayer });
         EventManager.instance.CastEvent(MyIndexEvent.spawnWeapon, new MyEventArgs() { sender = gameObject, myInt = countSpawnWeapon });
     }
 
